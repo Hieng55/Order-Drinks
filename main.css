@@ -7,8 +7,17 @@
 body {
     background-color: var(--orange);
     font-family: system-ui;
-    overflow: hidden;
 }
+/* Ẩn thanh cuộn cho các trình duyệt sử dụng WebKit */
+body::-webkit-scrollbar {
+    width: 0px; /* Kích thước thanh cuộn dọc */
+    height: 0px; /* Kích thước thanh cuộn ngang */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Màu nền của phần cuộn */
+}
+
 .container {
     width: 100%;
     border: 1px solid var(--white);

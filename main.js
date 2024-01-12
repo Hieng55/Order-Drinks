@@ -1,7 +1,7 @@
 const products = [
     {
         id: 1,
-        name: "Tĩnh long trà",
+        name: "Tea 1",
         description: "text...",
         priceMoney: 0,
         quantity: 1,
@@ -12,7 +12,7 @@ const products = [
     },
     {
         id: 2,
-        name: "Vân hải trà",
+        name: "Tea O long",
         description: "text...",
         quantity: 1,
         price: 20.03,
@@ -22,7 +22,7 @@ const products = [
     },
     {
         id: 3,
-        name: "Soda tinh không Trà",
+        name: "Soda Plus",
         description: "text...",
         quantity: 1,
         price: 20.03,
@@ -32,7 +32,7 @@ const products = [
     },
     {
         id: 4,
-        name: "Nước lọc",
+        name: "Water",
         description: "text...",
         quantity: 1,
         price: 20.03,
@@ -40,12 +40,14 @@ const products = [
         img: "img/img4.png",
         added: false,
     },
-  
 ];
 
 const productContainer = document.querySelector(".list-product");
 const cartContainer = document.querySelector(".poss");
+let searchVal = document.querySelector(".search-input");
+console.log(searchVal);
 function renderProductList(products) {
+    console.log(products);
     productContainer.innerHTML = "";
     let productInnerHTML = "";
     products.forEach((product) => {
@@ -136,11 +138,10 @@ function addCart(id) {
     if (product && !product.added) {
         product.added = true;
         updateTotal();
-    
+
         renderProductList(products);
         renderListCart(products);
     }
-   
 }
 
 function updateTotal() {
@@ -158,7 +159,6 @@ function updateTotal() {
 }
 
 function removeFromCart(id) {
-    // find the index of the item with the given id in the cart
     const product = products.find((item) => item.id === id);
     console.log(product);
     if (product && product.added) {
@@ -167,4 +167,18 @@ function removeFromCart(id) {
     }
     renderListCart(products);
 }
-renderProductList(products);
+function search() {
+    console.log("1");
+    let searchValue = searchVal.value;
+    const filterProducts = products.filter((product) => {
+        const title = product.name.toLowerCase();
+        let value = (searchValue || "").toLowerCase();
+        return title.includes(value);
+    });
+    renderProductList(filterProducts);
+}
+function init() {
+    renderProductList(products);
+}
+
+init();
